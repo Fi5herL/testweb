@@ -1,4 +1,4 @@
-# Point: Free Landing Page Template from Uisual
+# Point: 79-2-4 use
 
 ![Point Preview](https://res.cloudinary.com/uisual/image/upload/assets/screenshots/point.png)
 
