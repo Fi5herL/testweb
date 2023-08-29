@@ -27,8 +27,49 @@
     <!-- TITLE -->
 	<link rel="icon" href="https://flowingstream.org/wp-content/uploads/2020/04/cropped-512icon-32x32.png" type="image/x-icon" />
     <title>H79-2-4 Blog</title>
+	<style>
+	body {margin:0;}
+	
+	ul {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	  overflow: hidden;
+	  background-color: #333;
+	  position: fixed;
+	  top: 0;
+	  width: 100%;
+	}
+	
+	li {
+	  float: left;
+	}
+	
+	li a {
+	  display: block;
+	  color: white;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	}
+	
+	li a:hover:not(.active) {
+	  background-color: #111;
+	}
+	
+	.active {
+	  background-color: #04AA6D;
+	}
+	</style>
   </head>
   <body>
+	<ul>
+	  <li><a class="active" href="#home">Home</a></li>
+	  <li><a href="https://script.google.com/macros/s/AKfycbwJk3dJwJeMzjP-Xspd1Jinw7cXDYj6xabnYHBuqpJdBfOGjpcsRzR3bgmKuy-DLHe1/exec">Hymns</a></li>
+	  <li><a href="https://script.google.com/macros/s/AKfycbxsBcsE3yaJAWr9eRK-4HjVREo7GAZvUda_KhAzELoW__Q8pYaLN5_6Mov0Vr4QSfAn5w/exec">Bible</a></li>
+	  <li><a href="https://script.google.com/macros/s/AKfycbwnQtLj8GRSeCZq5m5_7Unsv7SbEnXr9F-eDJ3aIbEjlLf2lX_YSBgqDjZedEpzDrG5/exec">LifeStudy</a></li>
+	</ul>
+
     <header role="banner" class="ui-section-header">
       <div class="ui-layout-container">
         <div class="ui-section-header__layout ui-layout-flex">
