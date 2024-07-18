@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- META -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=1"> -->
+    <base target="_top">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <style>
+      mark {
+        background-color: yellow;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        /* text-align: left; */
+      }
+      th {
+        background-color: lightgray;
+      }
+    </style>
+    <style>
+      #searchResults {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 24px;
+      }
+
+      #searchResults td, #customers th {
+        border: 1px solid #ddd; 
+        padding: 8px;
+      }
+
+      #searchResults tr:nth-child(even){background-color: #f2f2f2;}
+
+      #searchResults tr:hover {background-color: #ddd;}
+
+      #searchResults th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+      }
+
+      #searchBox {
+        height: 90%;
+        padding: 12px 20px 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+      }
+
+      #button {
+        height: 90%;
+        padding: 12px 20px 12px 20px;
+      }
+
+      input[type=button] {
+        border: 0;
+        height: 60px;
+        width: 60px;
+      }
+      .number {
+        border: 0;
+        background-color: #447aee;
+        color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+      }
+      .number_0 {
+        border: 0;
+        background-color: #447aee;
+        color: #fff;
+        border-radius: 32px;
+        cursor: pointer;
+        font-size: 20px;
+        width: 120px !important;
+      }
+      .AC {
+        border: 0;
+        background-color: #777;
+        color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        /* width: 120px !important; */
+      }
+
+      #calculate table,table td,table th{border:1px solid;border-collapse:"";}
+    </style>
+    <style>
+      body {margin:0;}
+      
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+      
+      li {
+        float: left;
+      }
+      
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+      
+      .active {
+        background-color: #04AA6D;
+      }
+    </style>
+  </head>
+  <body>
+
+    <ul>
+      <li><a href="https://fi5herl.github.io/">Home</a></li>
+      <li><a class="active" href="https://fi5herl.github.io/Hymns">Hymns</a></li>
+      <li><a href="https://fi5herl.github.io/Bible">Bible</a></li>
+      <li><a href="https://fi5herl.github.io/LifeStudy">LifeStudy</a></li>
+      <li> 
+        <input type="text" id="searchBox" placeholder="Search..." value="" onkeypress="handle(event)">
+        <input type="submit" id="button" value="搜尋" onclick="submitButton()">
+      </li>
+      <img src="">
+    </ul>
+
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+
+
+    <table align="center" id='calculate' style="border:3px #FFFFFF dashed;width:250px;height:50px;">
+      <tr>
+      <td><input type="button" value="7" class="number" id="7" onclick="add(this)"></td>
+      <td><input type="button" value="8" class="number" id="8" onclick="add(this)"></td>
+      <td><input type="button" value="9" class="number" id="9" onclick="add(this)"></td>
+      </tr>
+      <tr>
+      <td><input type="button" value="4" class="number" id="4" onclick="add(this)"></td>
+      <td><input type="button" value="5" class="number" id="5" onclick="add(this)"></td>
+      <td><input type="button" value="6" class="number" id="6" onclick="add(this)"></td>
+      </tr>
+      <tr>
+      <td><input type="button" value="1" class="number" id="1" onclick="add(this)"></td>
+      <td><input type="button" value="2" class="number" id="2" onclick="add(this)"></td>
+      <td><input type="button" value="3" class="number" id="3" onclick="add(this)"></td>
+      </tr>
+      <tr>
+      <td colspan="2"><input type="button" value="0" class="number_0" id="0" onclick="add(this)"></td>
+      <td><input type="button" value="C" class="AC" id="erase" onclick="clearNum()"></td>
+      </tr>
+    </table>
+
+    <table id="searchResults"></table>
+    <!-- <iframe src="http://lshymn.net/" width="100%" height="1280"></iframe> -->
+    <script>
+      function handle(e){
+        address=document.getElementById("searchBox").value;
+          if(e.keyCode === 13){
+          //write your specific code from here
+            var table = document.getElementById('searchResults');
+            table.innerHTML = '搜尋中...';
+            search()
+          }
+        return false;
+      }
+      
+      function submitButton() {
+        var table = document.getElementById('searchResults');
+        table.innerHTML = '搜尋中...';
+        search()
+      }
+
+      function search() {
+        var keyword = document.getElementById('searchBox').value.trim();
+        if (keyword != "")
+          google.script.run.withSuccessHandler(updateSearchResults).search(keyword);
+      }
+
+      function updateSearchResults(data) {
+        var table = document.getElementById('searchResults');
+        table.innerHTML = '';
+
+        if (data.length > 0) {
+          var headerRow = document.createElement('tr');
+          var colNames = ["內容"]
+
+          for (var i = 0; i < data[0].length; i++) {
+            var headerCell = document.createElement('th');
+            headerCell.textContent = colNames[i];
+            headerRow.appendChild(headerCell);
+          }
+
+          table.appendChild(headerRow);
+
+          for (var j = 0; j < data.length; j++) {
+            var rowData = data[j];
+            var row = document.createElement('tr');
+
+            for (var k = 0; k < rowData.length; k++) {
+              var cell = document.createElement('tr');
+              cell.innerHTML = rowData[k];
+              row.appendChild(cell);
+            }
+            table.appendChild(row);
+          }
+        }
+        else {
+          table.innerHTML = '查無此資料';
+        }
+      }
+
+      // 計算click次數 且初始顯示0
+      var isClick = 0
+      // 將算式暫存為結果做準備
+      var everyClick = ""
+      
+      function clearNum() {
+        document.getElementById("searchBox").value = "";
+        everyClick = "";
+      }
+
+      // 按鍵的功能
+      function add(clickNum) {
+        // 如果是第一次按按鍵則清空原本的0
+        if (isClick == 0) {
+          document.getElementById("searchBox").value = ''
+        }
+        // click次數累加
+        isClick++;
+        // 如果按鍵class是數字 則顯示於結果列
+        var btn = clickNum.getAttribute("class");
+        if (btn == "number_0" || btn == "number") {
+          document.getElementById("searchBox").value += clickNum.value;
+        }
+      }
+    </script>
+  </body>
+</html>
